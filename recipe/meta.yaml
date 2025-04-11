@@ -27,6 +27,9 @@ requirements:
     - eth-hash >=0.7.0
     - pycryptodome >=3.6.6,<4
 
+# eth-hash is not avaliable in main channel.
+{% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
+
 test:
   source_files:
     - tests
@@ -37,12 +40,10 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v tests  # [py<313]
+    - pytest -v {{ ignore_tests }} tests
   requires:
     - pip
     - pytest
-    - eth-hash >=0.7.0  # [py<313]
-    - pycryptodome >=3.6.6,<4
 
 about:
   home: https://github.com/kvesteri/validators
