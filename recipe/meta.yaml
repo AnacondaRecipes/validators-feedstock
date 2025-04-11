@@ -37,11 +37,11 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v tests
+    - pytest -v tests  # [py<313]
   requires:
     - pip
     - pytest
-    - eth-hash >=0.7.0
+    - eth-hash >=0.7.0  # [py<313]
     - pycryptodome >=3.6.6,<4
 
 about:
