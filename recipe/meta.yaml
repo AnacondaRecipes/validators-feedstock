@@ -43,7 +43,7 @@ test:
     - pytest -v {{ ignore_tests }} tests
   requires:
     - pip
-    - pytest
+    - pytest >=8.3.2
 
 about:
   home: https://github.com/kvesteri/validators
