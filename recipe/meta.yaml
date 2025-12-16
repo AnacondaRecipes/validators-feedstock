@@ -1,24 +1,24 @@
 {% set name = "validators" %}
-{% set version = "0.34.0" %}
+{% set version = "0.35.0" %}
+{% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 647fe407b45af9a74d245b943b18e6a816acf4926974278f6dd617778e1e781f
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 992d6c48a4e77c81f1b4daba10d16c3a9bb0dbb79b3a19ea847ff0928e70497a
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  # [py<38]
+  skip: true  # [py<39]
 
 requirements:
   host:
     - pip
     - python
-    - wheel
     - setuptools
   run:
     - python
@@ -28,8 +28,6 @@ requirements:
     - pycryptodome >=3.6.6,<4
 
 # eth-hash is not avaliable in main channel.
-{% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
-
 test:
   source_files:
     - tests
@@ -52,12 +50,10 @@ about:
   license_family: MIT
   license_file: LICENSE.txt
   description: |
-    Python has all kinds of data validation tools, but every one of them seems to require defining a schema or form. 
+    Python has all kinds of data validation tools, but every one of them seems to require defining a schema or form.
     I wanted to create a simple validation library where validating a simple value does not require defining a form or a schema.
   dev_url: https://github.com/python-validators/validators
   doc_url: https://yozachar.github.io/pyvalidators/stable/
-  
-
   description: |
     Python data validation for Humans.
 
