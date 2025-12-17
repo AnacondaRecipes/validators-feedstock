@@ -1,6 +1,5 @@
 {% set name = "validators" %}
 {% set version = "0.35.0" %}
-{% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
 
 package:
   name: {{ name|lower }}
@@ -23,11 +22,12 @@ requirements:
   run:
     - python
   run_constrained:
-    # https://github.com/python-validators/validators/blob/0.34.0/pyproject.toml#L51
+    # https://github.com/python-validators/validators/blob/0.35.0/pyproject.toml#L51
     - eth-hash >=0.7.0
     - pycryptodome >=3.6.6,<4
 
 # eth-hash is not avaliable in main channel.
+{% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
 test:
   source_files:
     - tests
@@ -44,22 +44,18 @@ test:
     - pytest >=8.3.2
 
 about:
-  home: https://github.com/kvesteri/validators
+  home: https://github.com/python-validators/validators
   summary: Python Data Validation for Humans
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
   description: |
-    Python has all kinds of data validation tools, but every one of them seems to require defining a schema or form.
-    I wanted to create a simple validation library where validating a simple value does not require defining a form or a schema.
+    Python has all kinds of data validation tools, but every one of them
+    seems to require defining a schema or form. I wanted to create a simple
+    validation library where validating a simple value does not require
+    defining a form or a schema.
   dev_url: https://github.com/python-validators/validators
   doc_url: https://yozachar.github.io/pyvalidators/stable/
-  description: |
-    Python data validation for Humans.
-
-    Python has all kinds of data validation tools, but every one of them seems to require defining a schema or form. I wanted to create a simple validation library where validating a simple value does not require defining a form or a schema.
-  doc_url: https://validators.readthedocs.io/
-  dev_url: https://github.com/kvesteri/validators
 
 extra:
   recipe-maintainers:
