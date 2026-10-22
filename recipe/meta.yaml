@@ -1,18 +1,18 @@
 {% set name = "validators" %}
-{% set version = "0.35.0" %}
+{% set version = "0.36.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 992d6c48a4e77c81f1b4daba10d16c3a9bb0dbb79b3a19ea847ff0928e70497a
+  sha256: 92ad9ed00bbed320b784cec0ea90b213cf08904cf605b3d0852cfa4108e32a2c
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<39]
+  skip: true  # [py<311]
 
 requirements:
   host:
@@ -22,11 +22,11 @@ requirements:
   run:
     - python
   run_constrained:
-    # https://github.com/python-validators/validators/blob/0.35.0/pyproject.toml#L51
+    # https://github.com/python-validators/validators/blob/0.36.0/pyproject.toml#L51
     - eth-hash >=0.7.0
     - pycryptodome >=3.6.6,<4
 
-# eth-hash is not avaliable in main channel.
+# eth-hash is not available in main channel.
 {% set ignore_tests = " --ignore=tests/crypto_addresses/test_eth_address.py" %}
 test:
   source_files:
@@ -38,10 +38,10 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v {{ ignore_tests }} tests
+    - pytest -vv {{ ignore_tests }} tests
   requires:
     - pip
-    - pytest >=8.3.2
+    - pytest >=9.0.3
 
 about:
   home: https://github.com/python-validators/validators
@@ -55,7 +55,7 @@ about:
     validation library where validating a simple value does not require
     defining a form or a schema.
   dev_url: https://github.com/python-validators/validators
-  doc_url: https://yozachar.github.io/pyvalidators/stable/
+  doc_url: https://nandgator.github.io/pyvalidators
 
 extra:
   recipe-maintainers:
